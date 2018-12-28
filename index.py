@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import psycopg2
 
 def popularArticles():
@@ -19,23 +20,26 @@ def dayOfErrorRequest():
         print("%s - %s"%(dia[0],dia[1]))
 
 def main():
-    conn = psycopg2.connect("dbname=news")
-    global cursor 
-    cursor = conn.cursor()
+    try: 
+        conn = psycopg2.connect("dbname=news")
+        global cursor 
+        cursor = conn.cursor()
 
-    print('-------- 3 artigos mais populares --------')
-    popularArticles()
-    print('\n')
+        print('-------- 3 artigos mais populares --------')
+        popularArticles()
+        print('\n')
 
-    print('-------- Autores populares --------')
-    popularAuthors()
-    print('\n')
+        print('-------- Autores populares --------')
+        popularAuthors()
+        print('\n')
 
-    print('-------- Mais requisicoes com erro --------')
-    dayOfErrorRequest()
+        print('-------- Mais requisicoes com erro --------')
+        dayOfErrorRequest()
 
-    conn.close()
-
+        conn.close()
+    except psycopg2.Error as e:
+        print('Nao foi possivel conectar com o banco de dados')
+        
 if __name__ == "__main__":
     main()
 
