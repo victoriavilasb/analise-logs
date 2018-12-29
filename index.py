@@ -17,7 +17,7 @@ def dayOfErrorRequest():
     cursor.execute("select * from dia_maior_porc")
     dias = cursor.fetchall()
     for dia in dias:
-        print("%s - %s"%(dia[0],dia[1]))
+        print("%s - %1.2%%f"%(dia[0],dia[1]))
 
 def main():
     try: 
